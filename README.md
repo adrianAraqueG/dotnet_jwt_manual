@@ -1,14 +1,101 @@
-Sistema de Autenticación con Tokens Personalizados
+:shipit:🔐 Sistema de Autenticación con Tokens Personalizados 
 ==================================================
 
 Este repositorio contiene un sistema de autenticación personalizado basado en tokens, cumpliendo con la restricción de no utilizar librerías externas como JWT.
 
-Descripción General
+🎱 Descripción General
 -------------------
 
-El sistema se basa en la generación y validación manual de tokens usando el algoritmo HMACSHA256. Además de validar la firma del token, se verifica la fecha de expiración y se proporciona funcionalidad para refrescar y revocar tokens.
+El sistema se basa en la generación y validación manual de tokens usando el algoritmo **HMACSHA256**. Además de validar la firma del token, se verifica la fecha de expiración y se proporciona funcionalidad para refrescar y revocar tokens.
 
-TokenService
+🔧 Instalación
+-------------------
++ Configurar las conexión a la base de datos en **appsettins.json**
+    ```
+    ...
+    "ConnectionStrings":{
+            "DefaultConnection": "server=localhost;user=root;password=;database=jwtmanual"
+        }
+    ...
+    ```
++ Aplicar la migración a la base de datos:
+    ```
+    dotnet ef database update InitialCreate --project .\Persistence\
+    ```
+    **NOTA** En caso de que quieras crear y correr una nueva migración:
+    ```
+    dotnet ef database update YourMigration --project .\Persistence\ --startup-project .\API\ --output-dir .\Data\Migrations
+    dotnet ef database update YourMigration --project .\Persistence\
+    ```
++ **OPCIONAL** Configurar la clave secreta de encriptación en el constructor de **UserService**:
+     ```
+    ...
+    public UserService(IUnitOfWork unitOfWork){
+        _unitOfWork = unitOfWork;
+        _tokenService = new TokenService("YOUR_SECRET_KEY");
+    }
+    ...
+    ```
++ 🚀Lanzar la aplicación
+    ```
+    cd .\API\
+    dotnet run
+    ```
+
+## API Reference 🛰️
+
+#### Permite a los usuarios registrarse.
+
+```http
+  POST api/user/register
+  {
+      "username": "yourusername",
+      "password": "yourpassword",
+      "email": "email@domain.com"
+  }
+```
+
+#### Autentica a los usuarios y devuelve un token.
+
+```http
+  POST api/user/auth
+  {
+      "username": "yourusername",
+      "password": "yourpassword"
+  }
+```
+
+#### Verifica la validez de un token.
+
+```http
+  POST api/user/validate-token
+  {
+      "message": "statusmessage",
+      "isAuthenticated": bool,
+      "username": "yourusername",
+      "email": "email@domain.com",
+      "token": "yourtoken",
+      "refreshToken": "yourrefreshtoken",
+      "expiration": "TimeDate"
+  }
+```
+
+#### Renueva un token si se proporciona un refresh token válido.
+
+```http
+  POST api/user/refresh-token
+  "Authorization": "Bearer @token"
+```
+
+#### Revoca un token, evitando su reutilización.
+
+```http
+  POST api/user/logout
+  "Authorization": "Bearer @token"
+```
+
+
+🦬 TokenService | How it works
 ------------
 
 ### Generación de Tokens
@@ -61,11 +148,3 @@ Por último retornamos el hash convertido a texto (Base64) para poder utilizarlo
 ```csharp
 return Convert.ToBase64String(hashBytes);
 ```
-
-### Endpoints de la API
-
-    /register: Permite a los usuarios registrarse.
-    /auth: Autentica a los usuarios y devuelve un token.
-    /validate-token: Verifica la validez de un token.
-    /refresh-token: Renueva un token si se proporciona un refresh token válido.
-    /logout: Revoca un token, evitando su reutilización.
