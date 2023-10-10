@@ -1,0 +1,11 @@
+API/obj/
+API/bin/
+Application/bin/
+Application/obj/
+Domain/bin/
+Domain/obj/
+Persistence/bin/
+Persistence/obj/
+obj/
+bin/Debug/net7.0
+bin/
