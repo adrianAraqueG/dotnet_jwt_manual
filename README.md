@@ -3,17 +3,6 @@ Sistema de Autenticación con Tokens Personalizados
 
 Este repositorio contiene un sistema de autenticación personalizado basado en tokens. Aunque existen soluciones estandarizadas como JWT, este sistema fue creado para cumplir con restricciones de no usar librerías externas.
 
-Tabla de Contenido
-------------------
-
-* Descripción General
-* TokenService
-  * Generación de Tokens
-  * Verificación de Tokens
-* Endpoints de la API
-* Instalación y Uso
-* Contribuciones
-
 Descripción General
 -------------------
 
