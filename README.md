@@ -1,18 +1,7 @@
-Sistema de Autenticación con Tokens Personalizados
+SKELETON: Sistema de Autenticación con Tokens Personalizados
 ==================================================
 
-Este repositorio contiene un sistema de autenticación personalizado basado en tokens. Aunque existen soluciones estandarizadas como JWT, este sistema fue creado para cumplir con restricciones de no usar librerías externas.
-
-Tabla de Contenido
-------------------
-
-* Descripción General
-* TokenService
-  * Generación de Tokens
-  * Verificación de Tokens
-* Endpoints de la API
-* Instalación y Uso
-* Contribuciones
+Este repositorio es una extensión del principal. Su objetivo es que cualquiera pueda clonarlo e intentar implementar las funciones declaradas en la lógica de los servicios. Puede tomar la siguiente información como guía al igual que la rama principal ¡Buena suerte!
 
 Descripción General
 -------------------
