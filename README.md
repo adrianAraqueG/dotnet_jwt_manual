@@ -20,7 +20,7 @@ El sistema se basa en la generación y validación manual de tokens usando el al
     ```
 + Aplicar la migración a la base de datos:
     ```
-    dotnet ef database update InitialCreate --project .\Persistence\
+    dotnet ef database update InitialCreate --project .\Persistence\ --startup-project .\API\
     ```
     **NOTA** En caso de que quieras crear y correr una nueva migración:
     ```
