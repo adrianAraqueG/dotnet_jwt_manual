@@ -1,36 +1,4 @@
 SKELETON: Sistema de Autenticación con Tokens Personalizados
 ==================================================
 
-Este repositorio es una extensión del principal. Su objetivo es que cualquiera pueda clonarlo e intentar implementar las funciones declaradas en la lógica de los servicios. Puede tomar la siguiente información como guía al igual que la rama principal ¡Buena suerte!
-
-Descripción General
--------------------
-
-El sistema se basa en la generación y validación manual de tokens usando el algoritmo HMACSHA256. Además de validar la firma del token, se verifica la fecha de expiración y se proporciona funcionalidad para refrescar y revocar tokens.
-
-TokenService
-------------
-
-### Generación de Tokens
-
-La generación de tokens se lleva a cabo mediante el método `GenerateTokenSignature`. Este método toma como entrada información del usuario y genera un token firmado con una clave secreta.
-
-```csharp
-public string GenerateTokenSignature(DataTokenDto clientInfo, DateTime expiration);
-```
-
-### Verificación de Tokens
-
-La verificación se realiza a través del método VerifyTokenSignature, que comprueba tanto la firma como la fecha de expiración del token.
-
-```csharp
-public bool VerifyTokenSignature(string token, DataTokenDto clientInfo, DateTime expiration);
-```
-
-### Endpoints de la API
-
-    /register: Permite a los usuarios registrarse.
-    /auth: Autentica a los usuarios y devuelve un token.
-    /validate-token: Verifica la validez de un token.
-    /refresh-token: Renueva un token si se proporciona un refresh token válido.
-    /logout: Revoca un token, evitando su reutilización.
+Este repositorio es una extensión del principal. Su objetivo es que cualquiera pueda clonarlo e intentar implementar las funciones declaradas en la interfaz ```IUserService``` y los métodos declarados en la clase ```TokenService```, no es necesario modificar los controladores y la guía está en uno de los commits de éste branch o también en la master de este repositorio ¡Buena suerte!
